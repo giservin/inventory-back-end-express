@@ -56,9 +56,11 @@ kind: Service
 metadata:
   name: expresssvc
 spec:
+  type: NodePort
   selector:
     name: backend-express
   ports:
     - port: 8080
       targetPort: 8080
+      nodePort: 31222
 
