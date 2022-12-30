@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         IMAGE_NAME = "giservintz/be-inventory-express"
-        IMAGE_TAG = "1.0.0-test"
+        IMAGE_TAG = "1.0.0-dev"
     }
     stages {
         stage("Build Image") {
