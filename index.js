@@ -38,7 +38,7 @@ app.use(session({
 app.use(cors(
     {
         credentials: true,
-        origin: `${process.env.FRONTEND_URL}:${process.env.FRONTEND_PORT}`
+        origin: `*`
     }
 ))
 // dalam cors, credentials true agar front end dapat mengirimkan request besertakan cookies dgn credential nya
