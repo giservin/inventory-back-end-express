@@ -35,12 +35,7 @@ app.use(session({
 }))
 // cookies , secure nya klo true https, klo false http, cuman bisa nilai 'auto' buat detect protocol nya
 
-app.use(cors(
-    {
-        credentials: true,
-        origin: `*`
-    }
-))
+app.use(cors());
 // dalam cors, credentials true agar front end dapat mengirimkan request besertakan cookies dgn credential nya
 // origin untuk , domain apa yg dibolehkan untuk akses API ini (disini pake domain frontend, klo mau banyak bisa make array)
 
