@@ -26,6 +26,17 @@ pipeline {
                 }
             }
         }
+        stage("Deploy") {
+            agent {
+                node {
+                    label "master"
+                }
+            }
+            steps {
+                sh 'kubectl delete deployment backend-express'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+            }
+        }
     }
     post {
         failure {
