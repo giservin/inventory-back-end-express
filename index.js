@@ -38,7 +38,7 @@ app.use(session({
 app.use(cors(
     {
         credentials: true,
-        origin: `*`
+        origin: ['http://10.138.0.4:30001','http://10.138.0.5:30001','http://10.138.0.6:30001']
     }
 ))
 // dalam cors, credentials true agar front end dapat mengirimkan request besertakan cookies dgn credential nya
