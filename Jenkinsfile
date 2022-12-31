@@ -1,49 +1,10 @@
-pipeline {
-    agent none
-    triggers {
-        githubPush()
-    }
-    environment {
-        IMAGE_NAME = "giservintz/be-inventory-express"
-        IMAGE_TAG = "1.0.1"
-    }
-    stages {
-        stage("Build Image") {
-            agent {
-                node {
-                    label "agent-one"
-                }
-            }
-            steps {
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
-                withCredentials([usernamePassword(
-                    credentialsId: "docker_login",
-                    usernameVariable: "DOCKER_USER",
-                    passwordVariable: "DOCKER_PASSWORD"
-                )]){
-                    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
-                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
-                }
-            }
-        }
-        stage("Deploy") {
-            agent {
-                node {
-                    label "master"
-                }
-            }
-            steps {
-                sh 'kubectl delete deployment backend-express'
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl get svc'
-            }
-        }
-    }
-    post {
-        failure {
-            node("agent-one") {
-                sh "docker image prune -f"
-            }
-        }
-    }
-}
+@Library("belajar-jenkins-shared-library@main") _
+
+k8sPipeline([
+    type: "backend",
+    image_name: "giservintz/be-inventory-express",
+    image_tag: "1.0.1",
+    doBuild: false,
+    dockerCredentials: "docker_login",
+    deployment: "backend-express"
+])
