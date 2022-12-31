@@ -56,16 +56,30 @@ kind: Service
 metadata:
   name: expresssvc
 spec:
-  sessionAffinity: ClientIP
-  sessionAffinityConfig:
-    clientIP:
-      timeoutSeconds: 3600
-  type: LoadBalancer
   selector:
     name: backend-express
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 8080
       targetPort: 8080
-      nodePort: 31222
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: inventory-app-ingress
+spec:
+  rules:
+  - host: giservinapp.id
+    http:
+      paths:
+        backend:
+          serviceName: reactsvc
+          servicePort: 80
+  - host: api.giservinapp.id
+    http:
+      paths:
+        backend:
+          serviceName: expresssvc
+          servicePort: 8080
 
