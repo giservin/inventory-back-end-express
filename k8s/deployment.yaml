@@ -74,17 +74,17 @@ spec:
     - host: giservinapp.id
       http:
         paths:
-          backend:
-            service: 
-              name: reactsvc
-              port:
-                number: 80
+          - backend:
+              service:
+                name: reactsvc
+                port:
+                  number: 80
     - host: api.giservinapp.id
       http:
         paths:
-          backend:
-            service: 
-              name: expresssvc
-              port:
-                number: 8080
+          - backend:
+              service:
+                name: expresssvc
+                port:
+                  number: 8080
 
