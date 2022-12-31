@@ -35,6 +35,7 @@ pipeline {
             steps {
                 sh 'kubectl delete deployment backend-express'
                 sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl get svc'
             }
         }
     }
