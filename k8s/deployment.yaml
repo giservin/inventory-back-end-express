@@ -69,6 +69,10 @@ kind: Ingress
 metadata:
   name: inventory-app-ingress
 spec:
+  tls:
+  - hosts:
+      - giservinapp.id
+    secretName: inventory-secret-tls
   ingressClassName: nginx
   rules:
     - host: giservinapp.id
