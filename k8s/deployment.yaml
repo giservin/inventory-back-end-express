@@ -4,7 +4,7 @@ metadata:
   name: backend-env-config
 data:
   APP_PORT: "8080"
-  FRONTEND_URL: http://reactsvc.default.svc.cluster.local
+  FRONTEND_URL: http://34.145.100.26
   FRONTEND_PORT: "80"
   DB_HOST: app-mysql.default.svc.cluster.local
   DB_USERNAME: root
@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: backend-express
-          image: giservintz/be-inventory-express:1.0.0-test
+          image: giservintz/be-inventory-express:1.0.1
           ports:
             - containerPort: 8080
           envFrom:
@@ -56,11 +56,12 @@ kind: Service
 metadata:
   name: expresssvc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     name: backend-express
   ports:
-    - port: 8080
+    - protocol: TCP
+      port: 80
       targetPort: 8080
       nodePort: 31222
 
