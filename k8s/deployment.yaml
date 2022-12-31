@@ -56,6 +56,10 @@ kind: Service
 metadata:
   name: expresssvc
 spec:
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600
   type: LoadBalancer
   selector:
     name: backend-express
