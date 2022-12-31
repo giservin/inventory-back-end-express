@@ -64,22 +64,27 @@ spec:
 
 ---
 
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: inventory-app-ingress
 spec:
+  ingressClassName: nginx
   rules:
-  - host: giservinapp.id
-    http:
-      paths:
-        backend:
-          serviceName: reactsvc
-          servicePort: 80
-  - host: api.giservinapp.id
-    http:
-      paths:
-        backend:
-          serviceName: expresssvc
-          servicePort: 8080
+    - host: giservinapp.id
+      http:
+        paths:
+          backend:
+            service: 
+              name: reactsvc
+              port:
+                number: 80
+    - host: api.giservinapp.id
+      http:
+        paths:
+          backend:
+            service: 
+              name: expresssvc
+              port:
+                number: 8080
 
