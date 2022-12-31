@@ -74,7 +74,8 @@ spec:
     - host: giservinapp.id
       http:
         paths:
-          - pathType: Prefix
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: reactsvc
@@ -83,7 +84,8 @@ spec:
     - host: api.giservinapp.id
       http:
         paths:
-          - pathType: Prefix
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: expresssvc
